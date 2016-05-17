@@ -1,5 +1,7 @@
-@extends('layouts.master')
-
+@extends('layouts.master_applicant')
+<?php 
+	session_start();
+?>
 @section('content')
 
 <section id="content">

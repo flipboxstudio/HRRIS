@@ -48,61 +48,60 @@
 
 <body>
   
-<section id="content" class="login">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-13">
+  <section id="content" class="login">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-13">
 
-        <h1>HRRIS Login</h1>
-          <form action = {{url('/dologin')}} method="POST">
-
-          <br>
-
-          <div class="form-inline">
-            <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" name="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
-            </div>
+          <div class="box">
+          <h1>HRRIS Login</h1>
+          <form action = {{url('/dologin')}} method="GET">
 
             <br>
 
-            <div class="form-group">
-              <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" name ="password"class="form-control" id="exampleInputPassword3" placeholder="Password">
-            </div>
+            <div class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                <input type="email" name="email" class="form-login" id="exampleInputEmail3" placeholder="Enter email">
+              </div>
 
-            <br>
+              <br>
 
-            <button type="submit" class="btn btn-secondary">Login</button>
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-          </div>
-          
-          <?php 
-            if(session_id()){
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputPassword3">Password</label>
+                <input type="password" name ="password"class="form-login" id="exampleInputPassword3" placeholder="Password">
+              </div>
+
+              <div class = "error">
+              <?php 
+              if(session_id()){
+                if(isset($_SESSION['username'])){
+                  echo'<h4>';
+                  echo $_SESSION['username'];
+                  echo'</h4>';
+                }
                 echo'<h4>';
                 echo $_SESSION['loginError'];
                 echo'</h4>';
               }
               else{ 
               }
-            ?>
-            <!--<div class="form-group">
-              Haven't register yet? <a href="">Register here</a>
-            </div>
+              ?>
+              </div>
+              
+              <br>
 
-            <div class="vertical-separator"></div>
-
-            <div class="form-group">
-              <button type="submit" class="btn btn-danger">Login via Google Account</button>
+              <button type="submit" class="btn btn-secondary">Login</button>
+              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </div>
-            -->
-        </form>
+          </form>
+        </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-  
+
 </body>
 
 </html>

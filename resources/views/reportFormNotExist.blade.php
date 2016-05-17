@@ -1,27 +1,22 @@
 @extends('layouts.master')
-<?php  
-session_start();
-?>
-
-
-@section('title')
-@endsection
-
 
 @section('content')
 
-<div>
-	<p>Job Vacancy berikut belum memiliki report form.
-	 Untuk membuat report form silahkan pilih menu dibawah ini.</p>
-</div>
+<div class = "container">
 
-<div>
-	<a href="{{url('/JobVacant/ReportForm/CreateReportForm/' . $id_job_vacant) }}"><button type ="button" class="btn btn-primary">Create report form</button></a>
+<h1>Assessment Form</h1>
 
+<br>
 
-</div>
+<h4>This available vacancy, not having an assessment form yet.To create the assessment form, please choose this menu below.</h4>
+
+<br>
+
+<a href="{{url('/JobVacant/ReportForm/CreateReportForm/' . $id_job_vacant) }}">
+	<button type ="button" class="btn btn-secondary"><img src="{{asset('img/Icon - Add - White.png')}}">Create assessment form</button>
+</a>
 
 	
-
+</div>
 
 @stop

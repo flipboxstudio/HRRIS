@@ -1,41 +1,41 @@
 @extends('layouts.master')
 
-<?php 
-  session_start();
-?>
-@section('title')
-@endsection
-
 @section('content')
-<h1 style="text-align: center"> View Report Form </h1>
-<br>
-  <div class="col-md-8">
-    <div class="table-responsive">
-      <table class="table" style="margin-left:25%; margin-right:15%;">  
+
+<div class = "container">
+
+<div class="top">
+  <h1 class="alignleft"> View Assessment Form Competency </h1>
+  <br>
+  <button class = "btn btn-success alignright" type ="submit" onclick="window.location='{{url("/JobVacant/ReportForm/CheckReportForm/". $id_job_vacant)}}'">
+    <img src="{{asset('img/Icon - Edit.png')}}">Update
+  </button>
+</div>
+  
+    <div class="desc-group inline">
+      <table class="table">  
         <tbody>
           <tr>
-            <td>Job vacancy</td>
+            <td><label>Available Position</label></td>
             <td>{{ $nama_jv }}</td>
           </tr>
           <tr>
-            <td>Business function</td>
+            <td><label>Business Unit</label></td>
             <td>{{ $nama_divisi }}</td>
           </tr>
           <tr>
-            <td>Company</td>
+            <td><label>Company</label></td>
             <td>{{ $nama_company }}</td>
           </tr>
         </tbody>
       </table>
 
-      <br>
-
-      <table class="table" style="margin-left:25%; margin-right:15%;">
-         <h3 style="text-align:center">Competency List</h3>
+      <table class="table">
+         <h3>Competency List</h3>
         <thead>
-            <th>#</th>
-            <th>Nama Kompetensi</th>              
-            <th>Penjelasan</th>
+            <th>No.</th>
+            <th>Competency</th>              
+            <th>Explanation</th>
         </thead> 
         <tbody>
           <?php $i=0; ?>
@@ -56,13 +56,13 @@
         </tbody>
       </table>
     </div>
-  <div>
-          <button type ="submit" onclick="window.location='{{url("/JobVacant/ReportForm/UpdateReportForm/". $id_job_vacant)}}'">Update</button>
-        </div>
-  </div>
-  <br>
-        
-        
 
+     
+          
+        
+    
+  </div>
 @stop
+
+
 

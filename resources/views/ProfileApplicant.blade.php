@@ -1,43 +1,58 @@
-@extends('layouts.master_recruiter')
-
-@section('title')
-@endsection
+@extends('layouts.master')
 
 @section('content')
-<?php
-	session_start();
-?>
 
 <div class="container">
 	
-
+<div class="top">
+	<div class="alignleft">
 	@foreach ($applicantProfile as $ap)
 		<h1> {{ $ap->nama_applicant }} </h1>
 	@endforeach
+	</div>
 	<br>
-	<div class="desc-group inline">
+	<div class="alignright">
+		@foreach ($applicantProfile as $ap)
+
+		<a href="{{ URL::to('applicant/profile/report/' . $ap->id_applicant) }}">
+			<button type="button" class="btn btn-warning"> View Report </button>
+		</a>
+
+		<a href="{{ URL::to('applicant/profile/cv/' . $ap->id_applicant) }}"> 
+			<button type="button" class="btn btn-default">View CV</button>
+		</a>
+		
+		@if($ap->portofolio !== null)
+		<a href="{{ URL::to('applicant/profile/portofolio/' . $ap->id_applicant) }}">
+			<button type="button" class="btn btn-success"> View Portofolio</button>
+		</a>
+		@endif	
+
+		@endforeach
+	</div>
+	
+</div>
+	
+<div class="col-md-5">
+<div class="well">
 	<table border="0">
+		<div class="form-group"><label> Status Applicant History: </label></div>
+		@foreach ($applicantStatus as $as)
 		<tr>
-			<label> Status Applicant History: </label>
 			<td> <p style="color: white;"> spc </p></td>
 			<td> 
-				@foreach ($applicantStatus as $as)
-					<h5> {{ $as->posisi_ditawarkan }} </h5>
-				@endforeach
+				<h5> {{ $as->posisi_ditawarkan }} </h5>
 			</td>
 			<td> <p style="color: white;"> spc </p></td>
 			<td>
-				@foreach ($applicantStatus as $as)
-					<h5> {{ $as->nama_status }} </h5>
-				@endforeach
+				<h5> {{ $as->nama_status }} </h5>
 			</td>
 			<td> <p style="color: white;"> spc </p></td>
 			<td>
-				@foreach ($applicantStatus as $as)
-					<h5> {{ $as->tgl_konfirmasi }} </h5>
-				@endforeach
+				<h5> {{ $as->tgl_notifikasi }} </h5>				
 			</td>
 		</tr>
+		@endforeach
 	</table> 
 	
 	<br>
@@ -58,113 +73,91 @@
 	
 	
 	<div class="form-group">
-         <label for="status">Change Status : </label>
-            <select id='valuestatus' class="status" name="status">
+         <label for="status">Change Status : </label><br><br>
+         	<div class="input-group">
+            <select id='valuestatus' class="status form-control" name="status">
                 <option value="S03">Interview 1</option>
                 <option value="S04">Interview 2</option>
                 <option value="S06">Offering Letter</option>
                 <option value="S02">Reject</option>
                 <option value="S07">Hire</option>
             </select>
-           <input type="submit" value="Change">
+            <span class="input-group-btn">
+           <input type="submit" value="Change" class="btn btn-secondary">
+           </span>
+           </div>
     </div>  
     </form>
-	
-	</div>
-	<div class="vertical-separator"></div>
-	
+
+</div>
+
+</div>
+
+<div class="col-md-7">
+
 	<div class="desc-group inline">
-	<table border="0">
+	<table class="table">
+		@foreach ($applicantProfile as $ap)
 		<tr>
 			<td> <label>Email</label> </td>
-			<td> <p style="color: white;"> wspace </p></td>
-			<td> 
-				@foreach ($applicantProfile as $ap)
-					<h5> {{ $ap->emai_applicant }} </h5>
-				@endforeach
+			<td> <!-- <p style="color: white;"> wspace </p> --></td>
+			<td> 				
+				 {{ $ap->email_applicant }} 
 			</td>
 		</tr>
 		<tr>
 			<td> <label> Address </label> </td>
 			<td> </td>
 			<td> 
-				@foreach ($applicantProfile as $ap)
-					{{ $ap->alamat }}
-				@endforeach
+				{{ $ap->alamat }}
 			</td>
 		</tr>
 		<tr>
 			<td> <label> Gender </label> </td>
 			<td> </td>
 			<td> 
-				@foreach ($applicantProfile as $ap)
-					@if($ap->gender == '0')
-						{{$ap->gender = 'Woman'}}
-					@else
-						{{$ap->gender = 'Boy'}}
-					@endif
-				@endforeach
+				@if($ap->gender == 'F')
+					{{ 'Female' }}
+				@else
+					{{ 'Male' }}
+				@endif
 			</td>
 		</tr>
 		<tr>
 			<td> <label> Phone Number </label> </td>
 			<td> </td>
 			<td> 
-				@foreach ($applicantProfile as $ap)
-					{{ $ap->no_hp }}
-				@endforeach
+				{{ $ap->no_hp }}
 			</td>
 		</tr>
 		<tr>
 			<td> <label> University </label> </td>
 			<td> </td>
-			<td> 
-				@foreach ($applicantProfile as $ap)
-					{{ $ap->universitas }}
-				@endforeach
+			<td>
+				{{ $ap->universitas }}
 			</td>
 		</tr>
 		<tr>
 			<td> <label> Major </label> </td>
 			<td> </td>
 			<td> 
-				@foreach ($applicantProfile as $ap)
-					{{ $ap->jurusan }}
-				@endforeach
+				{{ $ap->jurusan }}
 			</td>
 		</tr>
 		<tr>
 			<td> <label> Graduate Year </label> </td>
 			<td> </td>
-			<td> 
-				@foreach ($applicantProfile as $ap)
-					{{ $ap->thn_lulus }}
-				@endforeach
+			<td>
+				{{ $ap->thn_lulus }}
 			</td>
 		</tr>
-	</table>
-</div>
-	<br>
-		<button type="button" class="btn btn-secondary"> View <br> Report </button>
-		@foreach ($applicantCV as $cv)
-		<?php 
-		//<a href="{{ URL::to('applicant/profile/CV/' . $cv->id_applicant) }}"> <button type="button" class="btn btn-primary">View <br> CV</button></a>
-		?>
-		<a href="{{asset('cv/CVfile.pdf')}}"> <button type="button" class="btn btn-primary">
-				View <br> CV</button>
-		</a>
 		@endforeach
-		<a href="{{asset('portofolio/ChrisAvore_UX_Portfolio.pdf')}}"> <button type="button" class="btn btn-success"> View <br> Portofolio</button>
+	</table>
+	</div>
 
-<!-- <br> <br>
-
-<form action="{{ url('uploadFile') }}" enctype="multipart/form-data">
-
-    <input type="file" name="file">
-    <input type="submit">
-
-</form> -->
-
+</div>
+</div>
+		
 
 @endsection
 

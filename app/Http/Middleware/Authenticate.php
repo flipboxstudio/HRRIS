@@ -16,15 +16,16 @@ class Authenticate
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
-    {
-        if (Auth::guard($guard)->guest()) {
-            if ($request->ajax() || $request->wantsJson()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('login');
+    {    
+       session_start();
+        if (isset($_SESSION['email'])) {
+            if ($_SESSION['booleanRole'] == 1) {
+                return redirect('Home');
             }
         }
-
+        else{
+            return redirect('/');
+        }
         return $next($request);
     }
 }
